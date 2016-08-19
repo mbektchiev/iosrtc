@@ -97,11 +97,11 @@ module.exports = function (context) {
 	// xcodeProject.parse(function (error) {
 		var configurations, buildSettings;
 
-		if (error) {
-			debugerror('an error occurred during the parsing of the project file: ' + error);
+		// if (error) {
+		// 	debugerror('an error occurred during the parsing of the project file: ' + error);
 
-			return;
-		}
+			// return;
+		// }
 
 
 		configurations = nonComments(xcodeProject.pbxXCBuildConfigurationSection());
