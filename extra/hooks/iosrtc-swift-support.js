@@ -24,17 +24,6 @@ var
 
 // Helpers
 
-// Returns the project name
-function getProjectName(protoPath) {
-	var
-		cordovaConfigPath = path.join(protoPath, 'config.xml'),
-		content = fs.readFileSync(cordovaConfigPath, 'utf-8');
-
-		console.error('iosrtc hook. content: ' + content);
-
-	return /<name>([\s\S]*)<\/name>/mi.exec(content)[1].trim();
-}
-
 // Drops the comments
 function nonComments(obj) {
 	var
@@ -57,10 +46,9 @@ function nonComments(obj) {
 module.exports = function (context) {
 	var
 		projectRoot = context.opts.projectRoot,
-		projectName = getProjectName(projectRoot),
-		xcconfigPath = path.join(projectRoot, '/platforms/ios/cordova/build.xcconfig'),
-		xcodeProjectName = projectName + '.xcodeproj',
-		xcodeProjectPath = path.join(projectRoot, 'platforms', 'ios', xcodeProjectName, 'project.pbxproj'),
+		xcodeProjectPath = fs.readdirSync(projectRoot).filter(function (file) { return ~file.indexOf('.xcodeproj') && fs.statSync(path.join(projectRoot, file)).isDirectory(); })[0],
+		projectName = xcodeProjectPath.slice(0, -'.xcodeproj'.length),
+		xcconfigPath = path.join(projectRoot, 'cordova', 'build.xcconfig'),
 		swiftBridgingHead = projectName + BRIDGING_HEADER_END,
 		swiftBridgingHeadXcode = '"' + swiftBridgingHead + '"',
 		swiftOptions = [''], // <-- begin to file appending AFTER initial newline
