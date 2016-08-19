@@ -54,6 +54,9 @@ module.exports = function (context) {
 		swiftOptions = [''], // <-- begin to file appending AFTER initial newline
 		xcodeProject;
 
+	debug('".xcodeproj" project file found: ' + xcodeProjectPath);
+	xcodeProjectPath = path.join(projectRoot, 'platforms', 'ios', xcodeProjectPath, 'project.pbxproj');
+
 	// Checking if the project files are in the right place
 	if (!fs.existsSync(xcodeProjectPath)) {
 		debugerror('an error occurred searching the project file at: "' + xcodeProjectPath + '"');
