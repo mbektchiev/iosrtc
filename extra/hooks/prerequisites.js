@@ -1,5 +1,3 @@
-console.log("iosrtc prerequisites");
-console.error("installing iosrtc prerequisites");
 module.exports = function (context) {
   var child_process = context.requireCordovaModule('child_process'),
       deferral = context.requireCordovaModule('q').defer();

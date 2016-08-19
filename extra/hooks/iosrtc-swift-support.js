@@ -69,7 +69,8 @@ module.exports = function (context) {
 	}
 	debug('".xcconfig" project file found: ' + xcconfigPath);
 
-	xcodeProject = xcode.project(xcodeProjectPath);
+	var projectFile = context.opts.cordova.project.parseProjectFile(projectRoot);
+	xcodeProject = projectFile.xcode;
 
 	// Showing info about the tasks to do
 	debug('fixing issues in the generated project files:');
@@ -93,11 +94,11 @@ module.exports = function (context) {
 
 	// "project.pbxproj"
 	// Parsing it
-	xcodeProject.parse(function (error) {
+	// xcodeProject.parse(function (error) {
 		var configurations, buildSettings;
 
 		if (error) {
-			debugerror('an error occurred during the parsing of the project file');
+			debugerror('an error occurred during the parsing of the project file: ' + error);
 
 			return;
 		}
@@ -116,12 +117,14 @@ module.exports = function (context) {
 		// Writing the file again
 		fs.writeFileSync(xcodeProjectPath, xcodeProject.writeSync(), 'utf-8');
 		debug('file correctly fixed: ' + xcodeProjectPath);
-	});
+	// });
 };
 
 
 function debug(msg) {
-	console.log('iosrtc-swift-support.js [INFO] ' + msg);
+	// console.log('iosrtc-swift-support.js [INFO] ' + msg);
+	// since console.log doesn't show up in the TP log we're routing these to debugerror
+	debugerror("[INFO, really] " + msg);
 }
 
 
