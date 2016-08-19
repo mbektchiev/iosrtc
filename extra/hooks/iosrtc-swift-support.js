@@ -2,6 +2,8 @@
 
 'use strict';
 
+console.error('running iosrtc hook');
+
 // This hook automates this:
 // https://github.com/eface2face/cordova-plugin-iosrtc/blob/master/docs/Building.md
 
@@ -27,6 +29,8 @@ function getProjectName(protoPath) {
 	var
 		cordovaConfigPath = path.join(protoPath, 'config.xml'),
 		content = fs.readFileSync(cordovaConfigPath, 'utf-8');
+
+		console.error('iosrtc hook. content: ' + content);
 
 	return /<name>([\s\S]*)<\/name>/mi.exec(content)[1].trim();
 }
