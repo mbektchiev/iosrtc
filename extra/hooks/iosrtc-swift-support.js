@@ -55,7 +55,8 @@ module.exports = function (context) {
 		xcodeProject;
 
 	debug('".xcodeproj" project file found: ' + xcodeProjectPath);
-	xcodeProjectPath = path.join(projectRoot, 'platforms', 'ios', xcodeProjectPath, 'project.pbxproj');
+	// xcodeProjectPath = path.join(projectRoot, 'platforms', 'ios', xcodeProjectPath, 'project.pbxproj');
+	xcodeProjectPath = path.join(xcodeProjectPath, 'project.pbxproj');
 
 	// Checking if the project files are in the right place
 	if (!fs.existsSync(xcodeProjectPath)) {
