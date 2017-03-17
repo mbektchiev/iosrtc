@@ -9,8 +9,7 @@ console.error('running iosrtc hook');
 
 var
 	fs = require("fs"),
-	path = require("path"),
-	xcode = require('xcode'),
+	path = require("path")
 
 	BUILD_VERSION = '9.0',
 	BUILD_VERSION_XCODE = '"' + BUILD_VERSION + '"',

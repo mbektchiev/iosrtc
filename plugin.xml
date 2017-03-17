@@ -19,7 +19,6 @@
 	</engines>
 
 	<platform name="ios">
-		<hook type="after_plugin_install" src="extra/hooks/prerequisites.js"/>
 		<hook type="after_plugin_install" src="extra/hooks/iosrtc-swift-support.js" />
 		<config-file target="config.xml" parent="/*">
 			<feature name="iosrtcPlugin">
